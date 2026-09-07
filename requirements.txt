@@ -1,0 +1,6 @@
+openai
+python-dotenv
+mysql-connector-python
+streamlit
+pandas
+sqlalchemy
