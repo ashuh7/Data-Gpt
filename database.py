@@ -1,12 +1,23 @@
+import os
+
 import pandas as pd
-from sqlalchemy import create_engine
+from dotenv import load_dotenv
+from sqlalchemy import URL,create_engine
 
 
-DATABASE_URL = (
-    "mysql+mysqlconnector://root:MYSQL_PASSWORD@MYSQL_HOST:MYSQL_PORT/MYSQL_DATABASE"
+load_dotenv()
+
+
+database_url = URL.create(
+    drivername="mysql+mysqlconnector",
+    username=os.getenv("MYSQL_USER"),
+    password=os.getenv("MYSQL_PASSWORD"),
+    host=os.getenv("MYSQL_HOST"),
+    port=int(os.getenv("MYSQL_PORT", 3306)),
+    database=os.getenv("MYSQL_DATABASE"),
 )
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(database_url)
 
 
 def execute_query(query):
